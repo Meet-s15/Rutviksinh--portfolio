@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutviksinh Parmar - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #0f0f23;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0f0f23, #1a1a3e, #0f0f23);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(102, 126, 234, 0.08) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        header {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(102, 126, 234, 0.3);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.8)); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInDown 1s ease, textShine 3s ease-in-out infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes textShine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .hero .subtitle {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            animation: slideInLeft 1s ease 0.3s backwards;
+        }
+
+        .hero .tagline {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            animation: slideInRight 1s ease 0.6s backwards;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.9s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: #667eea;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 3rem;
+        }
+
+        section {
+            background: rgba(26, 26, 62, 0.6);
+            backdrop-filter: blur(10px);
+            margin-bottom: 3rem;
+            padding: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: sectionFadeIn 0.8s ease forwards;
+        }
+
+        @keyframes sectionFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: lineGrow 1s ease forwards;
+        }
+
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 100px; }
+        }
+
+        .about-content {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .education-item {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+            animation: slideIn 0.6s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .education-item:hover {
+            transform: translateX(10px);
+            background: rgba(102, 126, 234, 0.15);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .education-item h3 {
+            color: #f093fb;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .education-item p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.4s;
+            animation: cardFloat 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes cardFloat {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+            border-color: #667eea;
+        }
+
+        .skill-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .skill-card h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+
+        .skill-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s;
+            animation: contactSlide 0.6s ease;
+        }
+
+        @keyframes contactSlide {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .contact-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .contact-item div {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-item strong {
+            color: #f093fb;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #667eea;
+        }
+
+        footer {
+            background: rgba(15, 15, 35, 0.95);
+            color: white;
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            nav {
+                padding: 0 1.5rem;
+            }
+
+            section {
+                padding: 2.5rem;
+            }
+
+            .container {
+                padding: 4rem 1.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <nav>
+            <div class="logo">Rutviksinh Parmar</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Rutviksinh Parmar</h1>
+            <p class="subtitle">Computer Science Engineering Student</p>
+            <p class="tagline">Building the future, one line of code at a time</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#skills" class="btn btn-secondary">View Skills</a>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>Hello! I'm Rutviksinh Parmar, a passionate Computer Science Engineering student currently in my 2nd year at Gyanmanjari Innovative University. I am dedicated to learning and growing in the field of web development and technology. With a strong foundation in frontend technologies and a keen interest in creating engaging digital experiences, I'm constantly expanding my skill set to stay ahead in this dynamic field.</p>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Bachelor of Technology - Computer Science Engineering</h3>
+                <p><strong>Gyanmanjari Innovative University</strong></p>
+                <p>Currently in 2nd Year</p>
+                <p>Pursuing comprehensive education in computer science fundamentals, programming, and software development.</p>
+            </div>
+            <div class="education-item">
+                <h3>Higher Secondary Education (11th & 12th)</h3>
+                <p><strong>B.N. Virani School</strong></p>
+                <p>Completed with a strong academic foundation in science and mathematics.</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">📄</div>
+                    <h3>HTML</h3>
+                    <p>Semantic markup and modern HTML5 practices</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>CSS</h3>
+                    <p>Responsive design, animations, and modern layouts</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h3>JavaScript</h3>
+                    <p>Interactive web experiences and dynamic functionality</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📱</div>
+                    <h3>WordPress</h3>
+                    <p>Content management and website development</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📱</span>
+                    <div>
+                        <strong>Phone</strong>
+                        <a href="tel:+919974757604">+91 99747 57604</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🎓</span>
+                    <div>
+                        <strong>University</strong>
+                        Gyanmanjari Innovative University
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">💼</span>
+                    <div>
+                        <strong>Status</strong>
+                        Available for internships and projects
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Rutviksinh Parmar. All rights reserved.</p>
+        <p>Crafted with passion and code</p>
+    </footer>
+</body>
+</html>
